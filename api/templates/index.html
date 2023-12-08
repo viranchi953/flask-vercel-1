@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+</head>
+<body>
+    <h1>Crop Prediction</h1>
+
+    <form method="post" action="/">
+        <label for="state">STATE:</label>
+        <input type="text" id="state" name="state" value="{{ user_input['STATE'] }}" required><br>
+
+        <label for="soil_type">SOIL_TYPE:</label>
+        <input type="text" id="soil_type" name="soil_type" value="{{ user_input['SOIL_TYPE'] }}" required><br>
+
+        <label for="n_soil">N_SOIL:</label>
+        <input type="number" id="n_soil" name="n_soil" value="{{ user_input['N_SOIL'] }}" required><br>
+
+        <label for="p_soil">P_SOIL:</label>
+        <input type="number" id="p_soil" name="p_soil" value="{{ user_input['P_SOIL'] }}" required><br>
+
+        <label for="k_soil">K_SOIL:</label>
+        <input type="number" id="k_soil" name="k_soil" value="{{ user_input['K_SOIL'] }}" required><br>
+
+        <label for="temperature">TEMPERATURE:</label>
+        <input type="number" id="temperature" name="temperature" value="{{ user_input['TEMPERATURE'] }}" required><br>
+
+        <label for="humidity">HUMIDITY:</label>
+        <input type="number" id="humidity" name="humidity" value="{{ user_input['HUMIDITY'] }}" required><br>
+
+        <label for="ph">ph:</label>
+        <input type="number" id="ph" name="ph" value="{{ user_input['ph'] }}" required><br>
+
+        <label for="rainfall">RAINFALL:</label>
+        <input type="number" id="rainfall" name="rainfall" value="{{ user_input['RAINFALL'] }}" required><br>
+
+        <input type="submit" value="Predict Crop">
+    </form>
+
+    {% if crops_with_scaled_proba %}
+        <h2>Top 5 recommended crops with scaled probabilities:</h2>
+        <ul>
+            {% for crop, scaled_prob in crops_with_scaled_proba[:5] %}
+                <li>Crop: {{ crop }}, Scaled Probability: {{ scaled_prob }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
